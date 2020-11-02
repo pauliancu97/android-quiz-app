@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
     indices = [Index(value = [Difficulty.NAME], unique = true)]
 )
 data class Difficulty(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = ID) val id: Int? = null,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = ID) val id: Long? = null,
     @ColumnInfo(name = NAME) val name: String
 ) {
     companion object{

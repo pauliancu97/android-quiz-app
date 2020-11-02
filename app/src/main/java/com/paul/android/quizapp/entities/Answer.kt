@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
     indices = [Index(value = [Answer.TEXT], unique = true)]
 )
 data class Answer(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = ID) val id: Int? = null,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = ID) val id: Long? = null,
     @ColumnInfo(name = TEXT) val text: String
 ) {
     companion object {

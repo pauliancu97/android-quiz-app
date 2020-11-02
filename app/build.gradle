@@ -70,4 +70,8 @@ dependencies {
     //Moshi
     implementation "com.squareup.retrofit2:converter-moshi:$rootProject.moshiVersion"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$rootProject.moshiVersion"
+
+    //Dagger
+    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
 }

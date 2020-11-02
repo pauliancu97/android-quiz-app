@@ -4,7 +4,9 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.paul.android.quizapp.database.dao.*
 import com.paul.android.quizapp.database.entities.*
+import javax.inject.Singleton
 
+@Singleton
 @Database(
     entities = [
         Difficulty::class,

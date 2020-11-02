@@ -5,12 +5,14 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.paul.android.quizapp.database.entities.Category
+import javax.inject.Singleton
 
+@Singleton
 @Dao
 interface CategoryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertAll(categories: List<Category>): List<Long>
+    suspend fun insertAll(categories: List<Category>): List<Long>
 
     @Query("SELECT * FROM ${Category.TABLE_NAME}")
-    fun getAll(): List<Category>
+    suspend fun getAll(): List<Category>
 }

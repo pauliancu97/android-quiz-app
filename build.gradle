@@ -17,6 +17,8 @@ buildscript {
         okhttpVersion = '4.3.1'
         moshiVersion = '2.4.0'
         daggerVersion = '2.27'
+        fragmentExtensionVersion = '1.1.0'
+        stethoVersion = '1.5.1'
     }
     repositories {
         google()

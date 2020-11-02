@@ -1,4 +1,4 @@
-package com.paul.android.quizapp.entities
+package com.paul.android.quizapp.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

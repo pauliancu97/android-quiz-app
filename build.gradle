@@ -19,6 +19,7 @@ buildscript {
         daggerVersion = '2.28.3'
         fragmentExtensionVersion = '1.1.0'
         stethoVersion = '1.5.1'
+        navVersion = '2.3.1'
     }
     repositories {
         google()

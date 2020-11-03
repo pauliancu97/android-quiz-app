@@ -12,4 +12,7 @@ interface QuestionAnswerDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(questionAnswer: QuestionAnswerCrossReference): Long
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(questionsAnswers: List<QuestionAnswerCrossReference>): List<Long>
 }

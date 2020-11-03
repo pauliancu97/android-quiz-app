@@ -11,4 +11,7 @@ import javax.inject.Singleton
 interface AnswerDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(answers: List<Answer>): List<Long>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(answer: Answer): Long
 }

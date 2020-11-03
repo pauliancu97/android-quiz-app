@@ -12,4 +12,7 @@ interface QuestionDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(questions: List<Question>): List<Long>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(question: Question): Long
 }

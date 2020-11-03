@@ -16,4 +16,7 @@ interface DifficultyDao {
 
     @Query("SELECT * FROM ${Difficulty.TABLE_NAME}")
     suspend fun getAll(): List<Difficulty>
+
+    @Query("SELECT ${Difficulty.ID} FROM ${Difficulty.TABLE_NAME} WHERE ${Difficulty.NAME} = :name")
+    suspend fun getDifficultyIdWithName(name: String): Long
 }

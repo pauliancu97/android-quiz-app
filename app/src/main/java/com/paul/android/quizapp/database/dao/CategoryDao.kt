@@ -15,4 +15,7 @@ interface CategoryDao {
 
     @Query("SELECT * FROM ${Category.TABLE_NAME}")
     suspend fun getAll(): List<Category>
+
+    @Query("SELECT ${Category.ID} FROM ${Category.TABLE_NAME} WHERE ${Category.NAME} = :name")
+    suspend fun getCategoryIdWithName(name: String): Long
 }

@@ -6,5 +6,48 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <style name="CreateGameLabelStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_label</item>
+        <item name="android:paddingTop">@dimen/padding_label</item>
+        <item name="android:paddingBottom">@dimen/padding_label</item>
+        <item name="android:paddingStart">@dimen/padding_label</item>
+        <item name="android:paddingEnd">@dimen/padding_label</item>
+    </style>
+    <style name="CreateGameTextButtonStyle" parent="CreateGameLabelStyle">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="CreateGameNumInputStyle">
+        <item name="android:layout_width">@dimen/width_num_input</item>
+        <item name="android:layout_height">@dimen/height_num_input</item>
+    </style>
+    <style name="CreateGameOperatorButtonStyle">
+        <item name="android:minHeight">5dp</item>
+        <item name="android:minWidth">5dp</item>
+    </style>
+    <style name="CreateGameMessageStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_label</item>
+        <item name="android:padding">@dimen/padding_label</item>
+    </style>
+    <style name="SelectOptionItemStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:padding">@dimen/padding_label</item>
+    </style>
+    <style name="SelectOptionsDialogButtonStyle">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/select_options_button_size_label</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:padding">@dimen/padding_label</item>
+    </style>
+    <style name="SelectOptionsTitleStyle" parent="@android:style/TextAppearance.DialogWindowTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingBottom">@dimen/padding_label</item>
+    </style>
+    <style name="SelectOptionsListStyle">
+        <item name="android:layout_height">@dimen/options_list_height</item>
+    </style>
 </resources>

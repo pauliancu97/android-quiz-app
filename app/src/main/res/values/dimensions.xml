@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_label">10dp</dimen>
+    <dimen name="text_size_label">20sp</dimen>
+    <dimen name="select_options_button_size_label">14sp</dimen>
+    <dimen name="width_num_input">50dp</dimen>
+    <dimen name="height_num_input">40dp</dimen>
+    <dimen name="options_list_height">160dp</dimen>
+</resources>

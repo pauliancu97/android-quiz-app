@@ -1,8 +1,23 @@
 <resources>
     <string name="app_name">QuizApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="quiz_app">Quiz App</string>
     <string name="play_quiz">Play Quiz!</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="category_label">Category:</string>
+    <string name="difficulty_label">Difficulty:</string>
+    <string name="type_label">Type:</string>
+    <string name="questions_number_label">Questions Number:</string>
+    <string name="time_limit_label">Time Limit:</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="create_quiz_message">Choose the quiz specifications</string>
+    <string name="easy_label">Easy</string>
+    <string name="medium_label">Medium</string>
+    <string name="hard_label">Hard</string>
+    <string name="any_label">Any</string>
+    <string name="multiple_choices_label">Multiple Choices</string>
+    <string name="true_false_label">True or False</string>
+    <string name="done_button">Done</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="choose_difficulty_label">Choose difficulty label</string>
 </resources>

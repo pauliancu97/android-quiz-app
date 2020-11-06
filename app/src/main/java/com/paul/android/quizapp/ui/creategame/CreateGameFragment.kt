@@ -52,7 +52,12 @@ class CreateGameFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.handleClicks(createGameAdapter.clickFlow) {
-            selectOptionsViewModel.initialize(it)
+            selectOptionsViewModel.initialize(
+                identifier = it,
+                category = viewModel.getSelectedCategory(),
+                difficulty = viewModel.getSelectedDifficulty(),
+                type = viewModel.getSelectedType()
+            )
             showSelectOptionsDialog()
         }
         viewModel.getState().observe(viewLifecycleOwner) {

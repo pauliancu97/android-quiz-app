@@ -88,7 +88,12 @@ class SelectOptionsViewModel(
         }
     }
 
-    fun initialize(identifier: SelectInputIdentifier) {
+    fun initialize(
+        identifier: SelectInputIdentifier,
+        category: CategoryModel? = null,
+        difficulty: DifficultyModel? = null,
+        type: QuestionTypeModel? = null
+    ) {
         when (identifier) {
             SelectInputIdentifier.Category -> {
                 viewModelScope.launch(Dispatchers.IO) {
@@ -100,7 +105,8 @@ class SelectOptionsViewModel(
                         }
                         Pair(name, it)
                     }
-                    val selection = options.firstOrNull()
+                    val selection = options.firstOrNull { it.second == category }
+                        ?: options.firstOrNull()
                     if (selection != null) {
                         stateFlow.value = SelectionState(options, selection, identifier)
                     }
@@ -112,7 +118,7 @@ class SelectOptionsViewModel(
                         val name = resources.getString(it.stringId)
                         Pair(name, it)
                     }
-                val selection = options.firstOrNull()
+                val selection = options.firstOrNull { it.second == type } ?: options.firstOrNull()
                 if (selection != null) {
                     stateFlow.value = SelectionState(options, selection, identifier)
                 }
@@ -123,7 +129,8 @@ class SelectOptionsViewModel(
                         val name = resources.getString(it.stringId)
                         Pair(name, it)
                     }
-                val selection = options.firstOrNull()
+                val selection = options.firstOrNull { it.second == difficulty }
+                    ?: options.firstOrNull()
                 if (selection != null) {
                     stateFlow.value = SelectionState(options, selection, identifier)
                 }

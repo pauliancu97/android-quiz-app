@@ -43,6 +43,12 @@ class CreateGameFragmentViewModel: ViewModel() {
         stateChannel.offer(stateChannel.value.copy(type = type))
     }
 
+    fun getSelectedCategory() = stateChannel.valueOrNull?.category
+
+    fun getSelectedDifficulty() = stateChannel.valueOrNull?.difficulty
+
+    fun getSelectedType() = stateChannel.valueOrNull?.type
+
     fun handleClicks(clicksFlow: Flow<Click?>, selectCallback: (SelectInputIdentifier) -> Unit) {
         viewModelScope.launch {
             clicksFlow

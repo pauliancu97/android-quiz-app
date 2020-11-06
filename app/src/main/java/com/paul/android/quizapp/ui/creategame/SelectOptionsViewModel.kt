@@ -67,7 +67,11 @@ class SelectOptionsViewModel(
                 .collect { state ->
                     val options = state.options.map { it.first }
                     val selection = state.selection.first
-                    adapterStateFlow.value = SelectOptionsAdapterState(options, selection)
+                    adapterStateFlow.value = SelectOptionsAdapterState(
+                        options,
+                        selection,
+                        state.identifier
+                    )
                 }
         }
     }

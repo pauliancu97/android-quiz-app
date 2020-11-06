@@ -18,7 +18,8 @@ import javax.inject.Inject
 
 data class SelectOptionsAdapterState(
     val options: List<String>,
-    val selectedOption: String
+    val selectedOption: String,
+    val identifier: SelectInputIdentifier
 )
 
 class SelectOptionsAdapter @Inject constructor(

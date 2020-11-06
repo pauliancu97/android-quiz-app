@@ -45,9 +45,10 @@
     </style>
     <style name="SelectOptionsTitleStyle" parent="@android:style/TextAppearance.DialogWindowTitle">
         <item name="android:textStyle">bold</item>
-        <item name="android:paddingBottom">@dimen/padding_label</item>
+        <item name="android:padding">@dimen/padding_label</item>
     </style>
     <style name="SelectOptionsListStyle">
         <item name="android:layout_height">@dimen/options_list_height</item>
+        <item name="android:minWidth">@dimen/option_dialog_min_width</item>
     </style>
 </resources>

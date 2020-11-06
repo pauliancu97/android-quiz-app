@@ -97,9 +97,7 @@ class CreateGameAdapter @Inject constructor(
             }
 
         override fun getChangePayload(oldItem: Item, newItem: Item) =
-            if (oldItem is Item.Message && newItem is Item.Message) {
-                PAYLOAD_ALL
-            } else if (oldItem is Item.SelectInput && newItem is Item.SelectInput) {
+            if (oldItem is Item.SelectInput && newItem is Item.SelectInput) {
                 oldItem.compare(newItem)
             } else if(oldItem is Item.NumberInput && newItem is Item.NumberInput) {
                 oldItem.compare(newItem)
@@ -165,7 +163,7 @@ class CreateGameAdapter @Inject constructor(
             state.timeLimit > state.minTimeLimit,
             state.timeLimit < state.maxTimeLimit
         )
-        val items = listOf(categoryItem, difficultyItem, typeItem, questionsNumberItem, timeLimitItem)
+        val items = listOf(Item.Message ,categoryItem, difficultyItem, typeItem, questionsNumberItem, timeLimitItem)
         submitList(items)
     }
 

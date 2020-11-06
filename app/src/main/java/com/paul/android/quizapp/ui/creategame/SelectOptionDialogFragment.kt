@@ -67,6 +67,12 @@ class SelectOptionDialogFragment: DialogFragment() {
                 }
             }
             optionsAdapter.update(it)
+            val selectionIndex = it.options.indexOf(it.selectedOption)
+            if(selectionIndex != -1) {
+                binding.optionsList.post {
+                    binding.optionsList.scrollToPosition(selectionIndex)
+                }
+            }
         }
     }
 

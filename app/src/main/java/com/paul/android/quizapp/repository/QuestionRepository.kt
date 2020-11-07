@@ -1,5 +1,6 @@
 package com.paul.android.quizapp.repository
 
+import android.util.Log
 import com.paul.android.quizapp.database.Database
 import com.paul.android.quizapp.database.dao.*
 import com.paul.android.quizapp.database.entities.Answer
@@ -34,6 +35,7 @@ class QuestionRepository @Inject constructor(
         )
         val jsonQuestions = response.results
         jsonQuestions.forEach { jsonQuestion ->
+            Log.i("QuestionRepository", jsonQuestion.toString())
             val categoryId = categoryDao.getCategoryIdWithName(jsonQuestion.category)
             val difficultyId = difficultyDao.getDifficultyIdWithName(jsonQuestion.difficulty)
             val correctAnswerId = answerDao.insert(Answer(text = jsonQuestion.correctAnswer))
@@ -51,5 +53,9 @@ class QuestionRepository @Inject constructor(
                 .map { QuestionAnswerCrossReference(questionId = questionId, answerId = it) }
             questionAnswerDao.insert(questionAndAnswerCrossRefs)
         }
+    }
+
+    suspend fun deleteAll() {
+        questionDao.deleteAll()
     }
 }

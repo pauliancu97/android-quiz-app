@@ -6,13 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paul.android.quizapp.R
 import com.paul.android.quizapp.databinding.FragmentCraeteGameBinding
-import com.paul.android.quizapp.ui.QuizApplication
+import com.paul.android.quizapp.models.toParcelable
+import com.paul.android.quizapp.ui.loading.LoadingFragment
 import com.paul.android.quizapp.ui.main.MainActivity
 import javax.inject.Inject
 
@@ -46,6 +48,16 @@ class CreateGameFragment : Fragment() {
             adapter = createGameAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+        binding.doneButton.setOnClickListener {
+            val arguments = bundleOf(
+                LoadingFragment.CATEGORY_ARG to viewModel.getState().category.toParcelable(),
+                LoadingFragment.DIFFICULTY_ARG to viewModel.getState().difficulty,
+                LoadingFragment.TYPE_ARG to viewModel.getState().type,
+                LoadingFragment.QUESTIONS_NUM_ARG to viewModel.getState().questionsNumber,
+                LoadingFragment.TIME_LIMIT_ARG to viewModel.getState().timeLimit
+            )
+            findNavController().navigate(R.id.toLoadingFragment, arguments)
+        }
         return binding.root
     }
 
@@ -60,7 +72,7 @@ class CreateGameFragment : Fragment() {
             )
             showSelectOptionsDialog()
         }
-        viewModel.getState().observe(viewLifecycleOwner) {
+        viewModel.getStateLiveData().observe(viewLifecycleOwner) {
             createGameAdapter.update(it)
         }
         selectOptionsViewModel.getCategoryLiveData().observe(viewLifecycleOwner) {

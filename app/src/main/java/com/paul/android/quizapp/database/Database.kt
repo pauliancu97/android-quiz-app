@@ -15,7 +15,7 @@ import javax.inject.Singleton
         Question::class,
         QuestionAnswerCrossReference::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class Database: RoomDatabase() {

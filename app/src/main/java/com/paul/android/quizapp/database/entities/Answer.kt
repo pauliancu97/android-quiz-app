@@ -6,8 +6,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = Answer.TABLE_NAME,
-    indices = [Index(value = [Answer.TEXT], unique = true)]
+    tableName = Answer.TABLE_NAME
 )
 data class Answer(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = ID) val id: Long? = null,

@@ -16,7 +16,9 @@ class DatabaseModule {
             context.applicationContext,
             Database::class.java,
             "database"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Provides
     fun provideCategoryDao(database: Database): CategoryDao =

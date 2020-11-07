@@ -15,4 +15,5 @@ class DifficultyRepository @Inject constructor(
         difficultyDao.insertAll(difficultiesEntities)
     }
 
+    suspend fun areDifficultiesCached() = difficultyDao.getNumberOfDifficulties() != 0L
 }

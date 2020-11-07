@@ -26,4 +26,6 @@ class CategoryRepository @Inject constructor(
         }
         return listOf(CategoryModel.AnyCategoryModel) + categoriesModels
     }
+
+    suspend fun areCategoriesCached() = categoryDao.getNumberOfCategories() != 0L
 }

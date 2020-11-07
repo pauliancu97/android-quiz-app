@@ -29,7 +29,7 @@ class CreateGameFragmentViewModel: ViewModel() {
     )
 
 
-    fun getState(): LiveData<CreateQuizStateModel> = stateChannel.asFlow().asLiveData()
+    fun getStateLiveData(): LiveData<CreateQuizStateModel> = stateChannel.asFlow().asLiveData()
 
     fun setCategory(category: CategoryModel) {
         stateChannel.offer(stateChannel.value.copy(category = category))
@@ -48,6 +48,8 @@ class CreateGameFragmentViewModel: ViewModel() {
     fun getSelectedDifficulty() = stateChannel.valueOrNull?.difficulty
 
     fun getSelectedType() = stateChannel.valueOrNull?.type
+
+    fun getState() = stateChannel.value
 
     fun handleClicks(clicksFlow: Flow<Click?>, selectCallback: (SelectInputIdentifier) -> Unit) {
         viewModelScope.launch {

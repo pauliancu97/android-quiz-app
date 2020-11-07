@@ -1,8 +1,11 @@
 package com.paul.android.quizapp.models
 
+import android.os.Parcelable
 import com.paul.android.quizapp.R
+import kotlinx.android.parcel.Parcelize
 
-enum class DifficultyModel(val id: String, val stringId: Int) {
+@Parcelize
+enum class DifficultyModel(val id: String, val stringId: Int): Parcelable {
     AnyType("", R.string.any_label),
     Easy("easy", R.string.easy_label),
     Medium("medium", R.string.medium_label),

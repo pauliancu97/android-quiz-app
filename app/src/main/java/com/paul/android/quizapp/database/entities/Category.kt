@@ -6,8 +6,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = Category.TABLE_NAME,
-    indices = [Index(value = [Category.NAME], unique = true)]
+    tableName = Category.TABLE_NAME
 )
 data class Category(
     @PrimaryKey @ColumnInfo(name = ID) val id: Long,

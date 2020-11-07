@@ -18,4 +18,7 @@ interface CategoryDao {
 
     @Query("SELECT ${Category.ID} FROM ${Category.TABLE_NAME} WHERE ${Category.NAME} = :name")
     suspend fun getCategoryIdWithName(name: String): Long
+
+    @Query("SELECT COUNT(*) FROM ${Category.TABLE_NAME}")
+    suspend fun getNumberOfCategories(): Long
 }

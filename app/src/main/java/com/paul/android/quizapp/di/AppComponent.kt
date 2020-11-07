@@ -7,6 +7,9 @@ import com.paul.android.quizapp.di.modules.DatabaseModule
 import com.paul.android.quizapp.di.modules.NetworkModule
 import com.paul.android.quizapp.ui.creategame.CreateGameFragment
 import com.paul.android.quizapp.ui.creategame.SelectOptionDialogFragment
+import com.paul.android.quizapp.ui.loading.LoadingFragment
+import com.paul.android.quizapp.ui.loadingcreatequiz.LoadingCreateQuizFragment
+import com.paul.android.quizapp.ui.start.StartFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -23,6 +26,9 @@ interface AppComponent {
         ): AppComponent
     }
 
+    fun inject(loadingCreateQuizFragment: LoadingCreateQuizFragment)
+    fun inject(startFragment: StartFragment)
+    fun inject(loadingFragment: LoadingFragment)
     fun inject(selectOptionsDialogFragment: SelectOptionDialogFragment)
     fun inject(mainActivity: MainActivity)
     fun inject(createGameFragment: CreateGameFragment)

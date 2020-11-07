@@ -6,8 +6,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = Difficulty.TABLE_NAME,
-    indices = [Index(value = [Difficulty.NAME], unique = true)]
+    tableName = Difficulty.TABLE_NAME
 )
 data class Difficulty(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = ID) val id: Long? = null,

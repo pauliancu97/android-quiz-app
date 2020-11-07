@@ -4,7 +4,6 @@ import androidx.room.*
 
 @Entity(
     tableName = Question.TABLE_NAME,
-    indices = [Index(value = [Question.TEXT], unique = true)],
     foreignKeys = [
         ForeignKey(
             entity = Difficulty::class,

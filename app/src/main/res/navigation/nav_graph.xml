@@ -9,14 +9,44 @@
         android:id="@+id/startFragment"
         android:name="com.paul.android.quizapp.ui.start.StartFragment"
         android:label="fragment_start"
-        tools:layout="@layout/fragment_start" >
+        tools:layout="@layout/fragment_start">
         <action
             android:id="@+id/action_startFragment_to_createGameFragment"
             app:destination="@id/createGameFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_loadingCreateQuizFragment"
+            app:destination="@id/loadingCreateQuizFragment" />
     </fragment>
     <fragment
         android:id="@+id/createGameFragment"
         android:name="com.paul.android.quizapp.ui.creategame.CreateGameFragment"
         android:label="fragment_craete_game"
-        tools:layout="@layout/fragment_craete_game" />
+        tools:layout="@layout/fragment_craete_game">
+        <action
+            android:id="@+id/toLoadingFragment"
+            app:destination="@id/loadingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="com.paul.android.quizapp.ui.loading.LoadingFragment"
+        android:label="fragment_loading"
+        tools:layout="@layout/fragment_loading">
+        <action
+            android:id="@+id/action_loadingFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.paul.android.quizapp.game.GameFragment"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" />
+    <fragment
+        android:id="@+id/loadingCreateQuizFragment"
+        android:name="com.paul.android.quizapp.ui.loadingcreatequiz.LoadingCreateQuizFragment"
+        android:label="fragment_loading_create_quiz"
+        tools:layout="@layout/fragment_loading_create_quiz" >
+        <action
+            android:id="@+id/action_loadingCreateQuizFragment_to_createGameFragment"
+            app:destination="@id/createGameFragment" />
+    </fragment>
 </navigation>

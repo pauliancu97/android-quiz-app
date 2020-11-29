@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.paul.android.quizapp.R
 import com.paul.android.quizapp.databinding.FragmentLoadingBinding
 import com.paul.android.quizapp.models.*
 import com.paul.android.quizapp.ui.main.MainActivity
+import com.paul.android.quizapp.ui.playgame.PlayQuizFragment
 import java.lang.IllegalStateException
 import javax.inject.Inject
 
@@ -61,10 +64,11 @@ class LoadingFragment : Fragment() {
         super.onResume()
         viewModel.createQuiz()
         viewModel.getLoadedEventLiveData().observe(viewLifecycleOwner) { event ->
-            event.getContentIfNotHandled()?.let { isLoaded ->
-                if (isLoaded) {
-                    findNavController().navigate(R.id.action_loadingFragment_to_gameFragment)
-                }
+            event.getContentIfNotHandled()?.let { quizInfo ->
+                findNavController().navigate(
+                    R.id.action_loadingFragment_to_playQuizFragment,
+                    bundleOf(PlayQuizFragment.KEY_QUIZ_INFO to quizInfo)
+                )
             }
         }
     }

@@ -9,7 +9,9 @@ import com.paul.android.quizapp.database.entities.QuestionAnswerCrossReference
 import com.paul.android.quizapp.models.CategoryModel
 import com.paul.android.quizapp.models.DifficultyModel
 import com.paul.android.quizapp.models.QuestionTypeModel
+import com.paul.android.quizapp.models.QuestionModel
 import com.paul.android.quizapp.network.service.QuizRetrofitService
+import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class QuestionRepository @Inject constructor(
@@ -53,6 +55,26 @@ class QuestionRepository @Inject constructor(
                 .map { QuestionAnswerCrossReference(questionId = questionId, answerId = it) }
             questionAnswerDao.insert(questionAndAnswerCrossRefs)
         }
+    }
+
+    suspend fun getAll(): List<QuestionModel> {
+        val questionEntities = questionDao.getAll()
+        return questionEntities
+            .mapNotNull { questionEntity -> questionEntity.id?.let { Pair(it, questionEntity) } }
+            .map { (questionId, questionEntity) ->
+                val difficultyString = difficultyDao.getDifficulty(questionEntity.difficultyId).name
+                val categoryString = categoryDao.getCategory(questionEntity.categoryId).name
+                val possibleAnswers = answerDao.getAnswersForQuestion(questionId)
+                val possibleAnswersStrings = possibleAnswers.map { it.text }
+                val correctAnswerString = possibleAnswers.find { it.id == questionEntity.correctAnswerId }?.text ?: throw IllegalStateException()
+                QuestionModel(
+                    questionText = questionEntity.text,
+                    category = categoryString,
+                    difficulty = difficultyString,
+                    possibleAnswers = possibleAnswersStrings,
+                    correctAnswer = correctAnswerString
+                )
+            }
     }
 
     suspend fun deleteAll() {

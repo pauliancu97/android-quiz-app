@@ -19,4 +19,7 @@ interface QuestionDao {
 
     @Query("DELETE FROM ${Question.TABLE_NAME}")
     suspend fun deleteAll()
+
+    @Query("SELECT * FROM ${Question.TABLE_NAME}")
+    suspend fun getAll(): List<Question>
 }

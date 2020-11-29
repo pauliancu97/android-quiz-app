@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_loadingFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_loadingFragment_to_playQuizFragment"
+            app:destination="@id/playQuizFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -48,5 +51,14 @@
         <action
             android:id="@+id/action_loadingCreateQuizFragment_to_createGameFragment"
             app:destination="@id/createGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playQuizFragment"
+        android:name="com.paul.android.quizapp.ui.playgame.PlayQuizFragment"
+        android:label="fragment_play_quiz"
+        tools:layout="@layout/fragment_play_quiz">
+        <argument
+            android:name="quizInfo"
+            app:argType="com.paul.android.quizapp.models.QuizInfo" />
     </fragment>
 </navigation>

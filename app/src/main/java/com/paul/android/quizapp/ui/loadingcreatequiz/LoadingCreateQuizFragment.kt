@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.paul.android.quizapp.R
 import com.paul.android.quizapp.databinding.FragmentLoadingCreateQuizBinding

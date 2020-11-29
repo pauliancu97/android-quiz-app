@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.paul.android.quizapp.models.CategoryModel
 import com.paul.android.quizapp.models.DifficultyModel
 import com.paul.android.quizapp.models.QuestionTypeModel
+import com.paul.android.quizapp.models.QuizInfo
 import com.paul.android.quizapp.repository.QuestionRepository
 import com.paul.android.quizapp.utils.Event
 import kotlinx.coroutines.Dispatchers
@@ -31,9 +32,9 @@ class LoadingFragmentViewModel(
     private var questionsNumber: Int = 0
     private var timeLimit: Int = 0
 
-    private val mutableLoadedEvent: MutableLiveData<Event<Boolean>> = MutableLiveData(Event(false))
+    private val mutableLoadedEvent: MutableLiveData<Event<QuizInfo>> = MutableLiveData()
 
-    fun getLoadedEventLiveData(): LiveData<Event<Boolean>> = mutableLoadedEvent
+    fun getLoadedEventLiveData(): LiveData<Event<QuizInfo>> = mutableLoadedEvent
 
     fun initialize(
         category: CategoryModel,
@@ -50,9 +51,14 @@ class LoadingFragmentViewModel(
     }
 
     fun createQuiz() {
-        viewModelScope.launch() {
-            createNewQuiz()
-            mutableLoadedEvent.value = Event(true)
+        viewModelScope.launch {
+            val questions = createNewQuiz()
+            mutableLoadedEvent.value = Event(
+                QuizInfo(
+                    questions = questions,
+                    timeLimitPerQuestion = timeLimit
+                )
+            )
         }
     }
 
@@ -64,5 +70,6 @@ class LoadingFragmentViewModel(
             difficulty = difficulty,
             type = type
         )
+        questionRepository.getAll()
     }
 }

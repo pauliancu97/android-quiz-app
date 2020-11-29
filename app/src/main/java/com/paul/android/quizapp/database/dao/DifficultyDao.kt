@@ -22,4 +22,7 @@ interface DifficultyDao {
 
     @Query("SELECT COUNT(*) FROM ${Difficulty.TABLE_NAME}")
     suspend fun getNumberOfDifficulties(): Long
+
+    @Query("SELECT * FROM ${Difficulty.TABLE_NAME} WHERE ${Difficulty.ID} = :difficultyId")
+    suspend fun getDifficulty(difficultyId: Long): Difficulty
 }

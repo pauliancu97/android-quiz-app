@@ -9,6 +9,7 @@ import com.paul.android.quizapp.ui.creategame.CreateGameFragment
 import com.paul.android.quizapp.ui.creategame.SelectOptionDialogFragment
 import com.paul.android.quizapp.ui.loading.LoadingFragment
 import com.paul.android.quizapp.ui.loadingcreatequiz.LoadingCreateQuizFragment
+import com.paul.android.quizapp.ui.playgame.PlayQuizFragment
 import com.paul.android.quizapp.ui.start.StartFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -32,4 +33,5 @@ interface AppComponent {
     fun inject(selectOptionsDialogFragment: SelectOptionDialogFragment)
     fun inject(mainActivity: MainActivity)
     fun inject(createGameFragment: CreateGameFragment)
+    fun inject(playQuizFragment: PlayQuizFragment)
 }

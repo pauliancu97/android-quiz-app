@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,6 +22,13 @@ class FinishQuizFragment : Fragment() {
 
     private lateinit var binding: FragmentFinishQuizBinding
     private val viewModel: FinishQuizViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            findNavController().navigate(R.id.action_finishQuizFragment_to_startFragment)
+        }.apply { isEnabled = true }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

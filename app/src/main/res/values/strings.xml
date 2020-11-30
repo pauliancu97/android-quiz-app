@@ -26,4 +26,8 @@
     <string name="score_label">%1$d/%2$d</string>
     <string name="play_again_button">Play Again</string>
     <string name="create_new_quiz_button">Create New Quiz</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="quit_quiz_alert_title">Quit Quiz?</string>
+    <string name="quit_quiz_alert_message">Are you sure you want to quit the current quiz?</string>
 </resources>

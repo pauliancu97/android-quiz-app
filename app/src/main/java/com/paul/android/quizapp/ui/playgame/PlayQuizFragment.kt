@@ -1,11 +1,13 @@
 package com.paul.android.quizapp.ui.playgame
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
@@ -30,6 +32,21 @@ class PlayQuizFragment : Fragment() {
 
     @Inject
     lateinit var answerListAdapter: AnswerListAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            val alertDialog = AlertDialog.Builder(requireContext())
+                .setTitle(R.string.quit_quiz_alert_title)
+                .setMessage(R.string.quit_quiz_alert_message)
+                .setPositiveButton(R.string.yes) { _, _ ->
+                    findNavController().navigate(R.id.action_playQuizFragment_to_startFragment)
+                }
+                .setNegativeButton(R.string.no) { _, _ -> }
+                .create()
+            alertDialog.show()
+        }.apply { isEnabled = true }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

@@ -1,10 +1,9 @@
 package com.paul.android.quizapp.ui.playgame
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.paul.android.quizapp.models.FinishQuizInfo
 import com.paul.android.quizapp.models.QuizInfo
+import com.paul.android.quizapp.utils.Event
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -13,6 +12,7 @@ import kotlinx.coroutines.launch
 class PlayQuizViewModel: ViewModel() {
 
     private val stateFlow: MutableStateFlow<PlayingQuizState?> = MutableStateFlow(null)
+    private val mutableFinishQuizEventLiveData: MutableLiveData<Event<FinishQuizInfo>> = MutableLiveData()
     private var questionTimer: Job? = null
     private var showResultTimer: Job? = null
 
@@ -21,6 +21,8 @@ class PlayQuizViewModel: ViewModel() {
     }
 
     fun stateLiveData(): LiveData<PlayingQuizState> = stateFlow.mapNotNull { it }.asLiveData()
+
+    fun finishQuizEventLiveData(): LiveData<Event<FinishQuizInfo>> = mutableFinishQuizEventLiveData
 
     init {
         viewModelScope.launch {
@@ -40,7 +42,8 @@ class PlayQuizViewModel: ViewModel() {
                             state.currentQuestionIndex,
                         timeLeftForCurrentQuestion = state.timeLimitPerQuestion,
                         questionResult = QuestionResult.Waiting,
-                        timeLeftForShowingResult = TIME_FOR_SHOW_RESULT
+                        timeLeftForShowingResult = TIME_FOR_SHOW_RESULT,
+                        finishedQuiz = state.currentQuestionIndex == state.questions.size - 1
                     )
                     questionTimer = viewModelScope.launch {
                         updateQuestionTimer()
@@ -60,6 +63,23 @@ class PlayQuizViewModel: ViewModel() {
                     showResultTimer = viewModelScope.launch {
                         updateShowResultTimer()
                     }
+                }
+        }
+        viewModelScope.launch {
+            stateFlow
+                .filterNotNull()
+                .filter { state -> state.finishedQuiz }
+                .map { state ->
+                    FinishQuizInfo(
+                        quizInfo = QuizInfo(
+                            questions = state.questions,
+                            timeLimitPerQuestion = state.timeLimitPerQuestion
+                        ),
+                        score = state.score
+                    )
+                }
+                .collect {
+                    mutableFinishQuizEventLiveData.value = Event(it)
                 }
         }
     }

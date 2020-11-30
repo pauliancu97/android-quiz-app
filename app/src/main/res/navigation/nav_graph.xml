@@ -60,5 +60,20 @@
         <argument
             android:name="quizInfo"
             app:argType="com.paul.android.quizapp.models.QuizInfo" />
+        <action
+            android:id="@+id/action_playQuizFragment_to_finishQuizFragment"
+            app:destination="@id/finishQuizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finishQuizFragment"
+        android:name="com.paul.android.quizapp.ui.finishgame.FinishQuizFragment"
+        android:label="fragment_finish_quiz"
+        tools:layout="@layout/fragment_finish_quiz" >
+        <action
+            android:id="@+id/action_finishQuizFragment_to_playQuizFragment"
+            app:destination="@id/playQuizFragment" />
+        <action
+            android:id="@+id/action_finishQuizFragment_to_createGameFragment"
+            app:destination="@id/createGameFragment" />
     </fragment>
 </navigation>

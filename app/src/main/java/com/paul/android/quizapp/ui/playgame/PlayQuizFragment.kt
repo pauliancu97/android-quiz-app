@@ -6,11 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.paul.android.quizapp.R
 import com.paul.android.quizapp.databinding.FragmentPlayQuizBinding
 import com.paul.android.quizapp.models.QuizInfo
+import com.paul.android.quizapp.ui.finishgame.FinishQuizFragment
 import com.paul.android.quizapp.ui.main.MainActivity
 import java.lang.IllegalStateException
 import javax.inject.Inject
@@ -62,6 +66,14 @@ class PlayQuizFragment : Fragment() {
             binding.timeLeftIndicatorBar.progress = it.timeLeftForCurrentQuestion
             binding.questionText.text = currentQuestion.questionText
             answerListAdapter.update(it)
+        }
+        viewModel.finishQuizEventLiveData().observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { finishQuizInfo ->
+                findNavController().navigate(
+                    R.id.action_playQuizFragment_to_finishQuizFragment,
+                    bundleOf(FinishQuizFragment.KEY_FINISH_QUIZ_INFO to finishQuizInfo)
+                )
+            }
         }
     }
 }

@@ -10,7 +10,8 @@ data class PlayingQuizState(
     val chosenAnswer: String? = null,
     val score: Int = 0,
     val questionResult: QuestionResult = QuestionResult.Waiting,
-    val timeLeftForShowingResult: Int = 0
+    val timeLeftForShowingResult: Int = 0,
+    val finishedQuiz: Boolean = false
 )
 
 enum class QuestionResult {

@@ -30,4 +30,8 @@
     <string name="no">No</string>
     <string name="quit_quiz_alert_title">Quit Quiz?</string>
     <string name="quit_quiz_alert_message">Are you sure you want to quit the current quiz?</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_out">Log Out</string>
+    <string name="hello_message">Hello, %1$s</string>
 </resources>

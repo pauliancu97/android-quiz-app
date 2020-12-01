@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import com.paul.android.quizapp.ui.main.MainActivity
 import com.paul.android.quizapp.di.modules.DatabaseModule
+import com.paul.android.quizapp.di.modules.FirebaseModule
 import com.paul.android.quizapp.di.modules.NetworkModule
 import com.paul.android.quizapp.ui.creategame.CreateGameFragment
 import com.paul.android.quizapp.ui.creategame.SelectOptionDialogFragment
@@ -16,7 +17,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [DatabaseModule::class, NetworkModule::class])
+@Component(modules = [DatabaseModule::class, NetworkModule::class, FirebaseModule::class])
 interface AppComponent {
 
     @Component.Factory

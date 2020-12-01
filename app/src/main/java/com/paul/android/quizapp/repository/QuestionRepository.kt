@@ -11,6 +11,7 @@ import com.paul.android.quizapp.models.DifficultyModel
 import com.paul.android.quizapp.models.QuestionTypeModel
 import com.paul.android.quizapp.models.QuestionModel
 import com.paul.android.quizapp.network.service.QuizRetrofitService
+import com.paul.android.quizapp.realtimedatabase.QuestionsFirebaseDao
 import java.lang.IllegalStateException
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class QuestionRepository @Inject constructor(
     private val answerDao: AnswerDao,
     private val questionAnswerDao: QuestionAnswerDao,
     private val quizRetrofitService: QuizRetrofitService,
-    private val database: Database
+    private val questionsFirebaseDao: QuestionsFirebaseDao
 ) {
     suspend fun fetchQuestions(
         amount: Int,
@@ -75,6 +76,10 @@ class QuestionRepository @Inject constructor(
                     correctAnswer = correctAnswerString
                 )
             }
+    }
+
+    suspend fun addToRealtimeDatabase(questions: List<QuestionModel>) {
+        questionsFirebaseDao.addQuestions(questions)
     }
 
     suspend fun deleteAll() {

@@ -1,5 +1,6 @@
 package com.paul.android.quizapp.ui.finishgame
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,8 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.paul.android.quizapp.R
 import com.paul.android.quizapp.databinding.FragmentFinishQuizBinding
+import com.paul.android.quizapp.ui.main.MainActivity
 import com.paul.android.quizapp.ui.playgame.PlayQuizFragment
 import java.lang.IllegalStateException
+import javax.inject.Inject
 
 class FinishQuizFragment : Fragment() {
 
@@ -20,8 +23,17 @@ class FinishQuizFragment : Fragment() {
         const val KEY_FINISH_QUIZ_INFO = "FINISH_QUIZ_INFO"
     }
 
+    @Inject
+    lateinit var viewModelFactory: FinishQuizViewModelFactory
     private lateinit var binding: FragmentFinishQuizBinding
-    private val viewModel: FinishQuizViewModel by viewModels()
+    private val viewModel: FinishQuizViewModel by viewModels {
+        viewModelFactory.create()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity() as MainActivity).appComponent.inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +54,7 @@ class FinishQuizFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (viewModel.finishQuizInfo == null) {
             viewModel.finishQuizInfo = arguments?.getParcelable(KEY_FINISH_QUIZ_INFO) ?: throw IllegalStateException()
+            viewModel.addInRealtimeDatabase()
         }
         viewModel.finishQuizInfo?.apply {
             binding.yourScoreLabel.text = getString(

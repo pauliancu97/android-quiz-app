@@ -9,7 +9,8 @@ data class QuestionModel(
     val category: String,
     val difficulty: String,
     val possibleAnswers: List<String>,
-    val correctAnswer: String
+    val correctAnswer: String,
+    val firebaseId: String? = null
 ): Parcelable {
 
     companion object {

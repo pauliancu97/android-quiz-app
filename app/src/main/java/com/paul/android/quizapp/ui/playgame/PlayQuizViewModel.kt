@@ -52,13 +52,14 @@ class PlayQuizViewModel: ViewModel() {
         }
         viewModelScope.launch {
             stateFlow
-                .mapNotNull { it?.timeLeftForCurrentQuestion }
-                .distinctUntilChanged()
-                .filter { it == 0 }
-                .collect {
+                .filterNotNull()
+                .distinctUntilChanged { old, new -> old.timeLeftForCurrentQuestion == new.timeLeftForCurrentQuestion }
+                .filter { it.timeLeftForCurrentQuestion == 0 }
+                .collect { state ->
                     questionTimer?.cancel()
-                    stateFlow.value = stateFlow.value?.copy(
-                        questionResult = QuestionResult.TimeExpired
+                    stateFlow.value = state.copy(
+                        questionResult = QuestionResult.TimeExpired,
+                        chosenAnswers = state.chosenAnswers + listOf<String?>(null)
                     )
                     showResultTimer = viewModelScope.launch {
                         updateShowResultTimer()
@@ -75,7 +76,8 @@ class PlayQuizViewModel: ViewModel() {
                             questions = state.questions,
                             timeLimitPerQuestion = state.timeLimitPerQuestion
                         ),
-                        score = state.score
+                        score = state.score,
+                        chosenAnswers = state.chosenAnswers
                     )
                 }
                 .collect {
@@ -136,7 +138,8 @@ class PlayQuizViewModel: ViewModel() {
                     stateFlow.value = currentState.copy(
                         chosenAnswer = answer,
                         score = if (answer == currentQuestion.correctAnswer) currentState.score + 1 else currentState.score,
-                        questionResult = if (answer == currentQuestion.correctAnswer) QuestionResult.Correct else QuestionResult.Incorrect
+                        questionResult = if (answer == currentQuestion.correctAnswer) QuestionResult.Correct else QuestionResult.Incorrect,
+                        chosenAnswers = currentState.chosenAnswers + answer
                     )
                     showResultTimer = viewModelScope.launch {
                         updateShowResultTimer()

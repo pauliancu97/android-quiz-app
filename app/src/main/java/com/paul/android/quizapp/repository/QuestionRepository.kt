@@ -78,9 +78,9 @@ class QuestionRepository @Inject constructor(
             }
     }
 
-    suspend fun addToRealtimeDatabase(questions: List<QuestionModel>) {
+    suspend fun addToRealtimeDatabase(questions: List<QuestionModel>) =
         questionsFirebaseDao.addQuestions(questions)
-    }
+
 
     suspend fun deleteAll() {
         questionDao.deleteAll()

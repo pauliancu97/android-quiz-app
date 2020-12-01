@@ -58,9 +58,9 @@ class LoadingFragmentViewModel(
 
     fun createQuiz() {
         viewModelScope.launch {
-            val questions = createNewQuiz()
+            var questions = createNewQuiz()
             if (userProvider.getUser() != null) {
-                questionRepository.addToRealtimeDatabase(questions)
+                questions = questionRepository.addToRealtimeDatabase(questions)
             }
             mutableLoadedEvent.value = Event(
                 QuizInfo(

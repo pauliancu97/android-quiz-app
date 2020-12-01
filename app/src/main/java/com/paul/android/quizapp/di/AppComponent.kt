@@ -8,6 +8,7 @@ import com.paul.android.quizapp.di.modules.FirebaseModule
 import com.paul.android.quizapp.di.modules.NetworkModule
 import com.paul.android.quizapp.ui.creategame.CreateGameFragment
 import com.paul.android.quizapp.ui.creategame.SelectOptionDialogFragment
+import com.paul.android.quizapp.ui.finishgame.FinishQuizFragment
 import com.paul.android.quizapp.ui.loading.LoadingFragment
 import com.paul.android.quizapp.ui.loadingcreatequiz.LoadingCreateQuizFragment
 import com.paul.android.quizapp.ui.playgame.PlayQuizFragment
@@ -35,4 +36,5 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(createGameFragment: CreateGameFragment)
     fun inject(playQuizFragment: PlayQuizFragment)
+    fun inject(finishQuizFragment: FinishQuizFragment)
 }

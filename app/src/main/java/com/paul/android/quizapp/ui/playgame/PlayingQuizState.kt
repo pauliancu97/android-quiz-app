@@ -11,7 +11,8 @@ data class PlayingQuizState(
     val score: Int = 0,
     val questionResult: QuestionResult = QuestionResult.Waiting,
     val timeLeftForShowingResult: Int = 0,
-    val finishedQuiz: Boolean = false
+    val finishedQuiz: Boolean = false,
+    val chosenAnswers: List<String?> = emptyList()
 )
 
 enum class QuestionResult {

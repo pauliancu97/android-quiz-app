@@ -50,6 +50,9 @@ class StartFragment : Fragment() {
         binding.logInButton.setOnClickListener {
             startSignIn()
         }
+        binding.logOutButton.setOnClickListener {
+            viewModel.signOutUser()
+        }
         return binding.root
     }
 

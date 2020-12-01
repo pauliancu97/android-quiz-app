@@ -51,4 +51,9 @@ class StartFragmentViewModel(
     fun updateUser() {
         userProvider.update()
     }
+
+    fun signOutUser() {
+        userProvider.signOut()
+        userProvider.update()
+    }
 }

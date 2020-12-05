@@ -22,7 +22,26 @@ suspend fun <T: Any> DatabaseReference.setValueSuspend(value: T) = suspendCorout
         }
 }
 
-fun <T: Any> DatabaseReference.asFlow() = callbackFlow<T> {
+suspend inline fun <reified T: Any> DatabaseReference.getValueOnceSuspend() = suspendCoroutine<T> { continuation ->
+    this.addListenerForSingleValueEvent(
+        object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value = snapshot.value as? T
+                if (value != null) {
+                    continuation.resume(value)
+                } else {
+                    continuation.resumeWithException(TypeCastException())
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                continuation.resumeWithException(error.toException())
+            }
+        }
+    )
+}
+
+inline fun <reified T: Any> DatabaseReference.asFlow() = callbackFlow<T> {
     val listener = object: ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) {
             val data = snapshot.value as? T

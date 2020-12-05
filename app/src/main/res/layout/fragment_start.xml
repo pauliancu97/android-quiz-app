@@ -40,11 +40,19 @@
         app:layout_constraintTop_toBottomOf="@id/appTitle"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <Button
+        android:id="@+id/historyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/history"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playQuizButton"/>
+    <Button
         android:id="@+id/logInButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log_in"
-        app:layout_constraintTop_toBottomOf="@id/playQuizButton"
+        app:layout_constraintTop_toBottomOf="@id/historyButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
     <Button

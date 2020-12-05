@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_startFragment_to_loadingCreateQuizFragment"
             app:destination="@id/loadingCreateQuizFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_quizHistoryFragment"
+            app:destination="@id/quizHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/createGameFragment"
@@ -82,4 +85,9 @@
             android:id="@+id/action_finishQuizFragment_to_startFragment"
             app:destination="@id/startFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/quizHistoryFragment"
+        android:name="com.paul.android.quizapp.ui.quizhistory.QuizHistoryFragment"
+        android:label="fragment_quiz_history"
+        tools:layout="@layout/fragment_quiz_history" />
 </navigation>

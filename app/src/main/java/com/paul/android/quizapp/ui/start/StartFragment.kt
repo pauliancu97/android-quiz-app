@@ -53,6 +53,9 @@ class StartFragment : Fragment() {
         binding.logOutButton.setOnClickListener {
             viewModel.signOutUser()
         }
+        binding.historyButton.setOnClickListener {
+            findNavController().navigate(R.id.action_startFragment_to_quizHistoryFragment)
+        }
         return binding.root
     }
 
@@ -78,6 +81,7 @@ class StartFragment : Fragment() {
                 signUpButton.visibility = notLoggedInVisibility
                 logOutButton.visibility = loggedInVisibility
                 helloMessage.visibility = loggedInVisibility
+                historyButton.visibility = loggedInVisibility
                 user?.displayName?.let {
                     helloMessage.text = getString(R.string.hello_message, it)
                 }

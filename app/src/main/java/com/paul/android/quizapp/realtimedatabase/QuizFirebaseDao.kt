@@ -3,8 +3,14 @@ package com.paul.android.quizapp.realtimedatabase
 import com.google.firebase.database.FirebaseDatabase
 import com.paul.android.quizapp.models.FinishQuizInfo
 import com.paul.android.quizapp.models.QuestionModel
+import com.paul.android.quizapp.models.QuizDescriptionModel
 import com.paul.android.quizapp.users.UserProvider
+import com.paul.android.quizapp.utils.asFlow
+import com.paul.android.quizapp.utils.getReferenceByPath
+import com.paul.android.quizapp.utils.getValueOnceSuspend
 import com.paul.android.quizapp.utils.setValueSuspend
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -36,6 +42,38 @@ class QuizFirebaseDao @Inject constructor(
             KEY_CHOSEN_ANSWER to chosenAnswer
         )
     }
+
+    private fun getQuizDescriptionModelFromMap(map: Map<String, Any?>): QuizDescriptionModel {
+        val dateFormatter = SimpleDateFormat(DATE_FORMAT)
+        val date = (map[KEY_DATE] as? String)?.let {
+            try {
+                dateFormatter.parse(it)
+            } catch (ex: Throwable) {
+                null
+            }
+        } ?: throw IllegalArgumentException()
+        val numOfQuestions = (map[KEY_NUM_QUESTIONS] as? Long)?.toInt() ?: throw IllegalArgumentException()
+        val score = (map[KEY_SCORE] as? Long)?.toInt() ?: throw IllegalArgumentException()
+        val timeLimit = (map[KEY_TIME_LIMIT] as? Long)?.toInt() ?: throw IllegalArgumentException()
+        return QuizDescriptionModel(
+            date = date,
+            numOfQuestions = numOfQuestions,
+            score = score,
+            timeLimit = timeLimit
+        )
+    }
+
+    private suspend fun getQuizDescriptionModel(quizUid: String): QuizDescriptionModel {
+        val quizReference = firebaseDatabase.reference.getReferenceByPath("quizes/$quizUid")
+        val mapOfQuizDescriptionModel = quizReference.getValueOnceSuspend<Map<String, Any?>>()
+        return getQuizDescriptionModelFromMap(mapOfQuizDescriptionModel)
+    }
+
+    fun getUserQuizesDescriptionModels(userUid: String): Flow<List<QuizDescriptionModel>> =
+        firebaseDatabase.reference.getReferenceByPath("users/$userUid/quizes")
+            .asFlow<Map<String, Any?>>()
+            .map { it.keys.toList() }
+            .map { quizesUids -> quizesUids.map { getQuizDescriptionModel(it) } }
 
     private suspend fun addQuizQuestion(quizQuestion: Map<String, Any?>): String? {
         val reference = firebaseDatabase.reference.child(KEY_QUIZ_QUESTION).push()

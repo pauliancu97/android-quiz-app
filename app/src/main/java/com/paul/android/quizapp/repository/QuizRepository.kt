@@ -8,4 +8,6 @@ class QuizRepository @Inject constructor(
     private val quizFirebaseDao: QuizFirebaseDao
 ){
     suspend fun addQuiz(finishQuizInfo: FinishQuizInfo) = quizFirebaseDao.addQuiz(finishQuizInfo)
+
+    fun getQuizesForUser(userUid: String) = quizFirebaseDao.getUserQuizesDescriptionModels(userUid)
 }

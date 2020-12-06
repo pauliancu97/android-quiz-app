@@ -35,4 +35,8 @@
     <string name="log_out">Log Out</string>
     <string name="hello_message">Hello, %1$s</string>
     <string name="history">History</string>
+    <string name="date">Date:</string>
+    <string name="score">Score:</string>
+    <string name="time_limit">Time Limit:</string>
+    <string name="time_limit_value">%1$d secs</string>
 </resources>

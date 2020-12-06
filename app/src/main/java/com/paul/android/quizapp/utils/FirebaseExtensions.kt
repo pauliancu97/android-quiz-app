@@ -22,6 +22,15 @@ suspend fun <T: Any> DatabaseReference.setValueSuspend(value: T) = suspendCorout
         }
 }
 
+fun DatabaseReference.getReferenceByPath(path: String): DatabaseReference {
+    var resultReference = this
+    val children = path.split('/')
+    for (child in children) {
+        resultReference = resultReference.child(child)
+    }
+    return resultReference
+}
+
 suspend inline fun <reified T: Any> DatabaseReference.getValueOnceSuspend() = suspendCoroutine<T> { continuation ->
     this.addListenerForSingleValueEvent(
         object: ValueEventListener {
